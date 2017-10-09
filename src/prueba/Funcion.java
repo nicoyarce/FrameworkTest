@@ -8,8 +8,8 @@ import org.moeaframework.problem.AbstractProblem;
  *
  * @author Nicoyarce
  */
+//Problema con dos variables y un objetivo
 public class Funcion extends AbstractProblem {
-
     public Funcion() {
         super(2, 1); //n variables totales , n de variables objetivo
     }
@@ -29,7 +29,7 @@ public class Funcion extends AbstractProblem {
     @Override
     public Solution newSolution() {
         Solution solution = new Solution (2,1); //n variables totales , n de variables objetivo
-        solution.setVariable(0, EncodingUtils.newReal(-10.0,10.0));  // dominio de busqueda
+        solution.setVariable(0, EncodingUtils.newReal(-10.0,10.0));  // dominio de busqueda por cada variable
         solution.setVariable(1, EncodingUtils.newReal(-10.0,10.0));
         return solution;
     }
