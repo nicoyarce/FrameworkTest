@@ -1,4 +1,4 @@
-package prueba;
+package moea;
 
 import org.moeaframework.core.Solution;
 import org.moeaframework.core.variable.EncodingUtils;

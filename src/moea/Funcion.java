@@ -1,4 +1,4 @@
-package prueba;
+package moea;
 
 import org.moeaframework.core.Solution;
 import org.moeaframework.core.variable.EncodingUtils;
@@ -29,8 +29,8 @@ public class Funcion extends AbstractProblem {
     @Override
     public Solution newSolution() {
         Solution solution = new Solution (2,1); //n variables totales , n de variables objetivo
-        solution.setVariable(0, EncodingUtils.newReal(-10.0,10.0));  // dominio de busqueda por cada variable
-        solution.setVariable(1, EncodingUtils.newReal(-10.0,10.0));
+        solution.setVariable(0, EncodingUtils.newReal(5.0,10.0));  // dominio de busqueda por cada variable
+        solution.setVariable(1, EncodingUtils.newReal(5.0,10.0));
         return solution;
     }
     
