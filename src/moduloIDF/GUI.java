@@ -1,4 +1,4 @@
-package proyectoTitulo;
+package moduloIDF;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -79,11 +79,6 @@ public class GUI extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
     private void selectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorActionPerformed
-        try {
-            CargaIDF.apitest.runCommand();
-        } catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
         System.out.println("accion");
     }//GEN-LAST:event_selectorActionPerformed
 
@@ -128,16 +123,19 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JFileChooser selector;
     // End of variables declaration//GEN-END:variables
 
-    void comprobarSelector(){
+    private void comprobarSelector(){
         filtro = new FileNameExtensionFilter("IDF", "idf");
         selector.setFileFilter(filtro);
         int status = selector.showOpenDialog(null);
         if (status == JFileChooser.APPROVE_OPTION) {
             CargaIDF.rutaIDF = selector.getSelectedFile().getAbsolutePath();
-            System.out.println(CargaIDF.rutaIDF);
+            System.out.println(CargaIDF.rutaIDF);            
         } else if (status == JFileChooser.CANCEL_OPTION) {
             System.out.println("Cancelado");
+        } else{
+            System.out.println("Error");
         }
+        
     }
     
     

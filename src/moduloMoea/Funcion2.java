@@ -1,4 +1,4 @@
-package moea;
+package moduloMoea;
 
 import org.moeaframework.core.Solution;
 import org.moeaframework.core.variable.EncodingUtils;
@@ -37,7 +37,7 @@ public class Funcion2 extends AbstractProblem {
 
     @Override
     public Solution newSolution() {
-        Solution solution = new Solution (2, 1, 2); //n variables totales , n de variables objetivo, n de restricciones
+        Solution solution = new Solution (getNumberOfVariables(), getNumberOfObjectives(), getNumberOfConstraints()); //n variables totales , n de variables objetivo, n de restricciones
         
         // se fija dominio de busqueda por cada variable
         solution.setVariable(0, EncodingUtils.newReal(-1.5, 1.5));  
