@@ -1,5 +1,6 @@
 package moduloMoea;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import moduloIDF.CargaIDF;
@@ -11,51 +12,61 @@ import org.moeaframework.problem.AbstractProblem;
  *
  * @author Nicoyarce
  */
-//Problema con dos variables y con dos objetivos
+//Funcion de optimizacion de archivos IDF
 public class FuncionPrueba extends AbstractProblem {
 
     public CargaIDF moduloDatos = new CargaIDF();
-    public ArrayList<String> salidaAbrirIDF = new ArrayList<>();
-    public ArrayList<ArrayList> salidaExtraccionDatos = new ArrayList<>();
     public ArrayList<String> modificaciones = new ArrayList<>();
 
-    public FuncionPrueba() throws IOException {
-        super(1, 1); //n variables totales , n de variables objetivo
-        salidaAbrirIDF = moduloDatos.abrirIDF();
+    public FuncionPrueba() throws FileNotFoundException, IOException {
+        super(CargaIDF.nVariables, CargaIDF.nObjetivos);
+        System.out.println("nVariables: " + CargaIDF.nVariables + " - " + "nObjetivos: " + CargaIDF.nObjetivos);
+
+        //////Operaciones sobre IDF//////        
         moduloDatos.simularIDF();
-        salidaExtraccionDatos = moduloDatos.extraerDatosReporte();
+        moduloDatos.extraerDatosReporte();
+        System.out.println("Valores originales:");
+        System.out.println(moduloDatos.salidaAbrirIDF.get(0) + "=>" + moduloDatos.salidaExtraccionDatos.get(0).getValor());
     }
 
     @Override
     public Solution newSolution() {
-        Solution solution = new Solution(getNumberOfVariables(), getNumberOfObjectives()); //n variables totales , n de variables objetivo        
+        Solution solution = new Solution(CargaIDF.nVariables, CargaIDF.nObjetivos); //n variables totales , n de variables objetivo        
         // se fija dominio de busqueda por cada variable
         // dominio de busqueda basado en valores de idf
         // primer caso: thickness        
-        double numero = Double.parseDouble(salidaAbrirIDF.get(0));
-        double delta = numero * 1.5;
-        solution.setVariable(0, EncodingUtils.newReal(delta - numero, delta + numero));
+        double numero;
+        double delta;
+        for (int i = 0; i < CargaIDF.nVariables; i++) {
+            numero = Double.parseDouble(moduloDatos.salidaAbrirIDF.get(i));
+            delta = numero * 1.5;
+            delta = (double) Math.round(delta * 1000d) / 1000d;
+            solution.setVariable(i, EncodingUtils.newReal(delta - numero, delta + numero));
+        }
         return solution;
     }
 
     @Override
     public void evaluate(Solution sltn) {
-        /* numerar variables de todo el problema */
-        double x = EncodingUtils.getReal(sltn.getVariable(0));
-        modificaciones.add(String.valueOf(x));
+        /*variables de todo el problema */
+        double variable;
+        for (int i = 0; i < CargaIDF.nVariables; i++) {
+            variable = EncodingUtils.getReal(sltn.getVariable(i));
+            modificaciones.add(String.valueOf(variable));
+        }
         try {
             moduloDatos.modificarIDF(modificaciones);
-            //salidaAbrirIDF = moduloDatos.abrirIDF();
             moduloDatos.simularIDF();
-            salidaExtraccionDatos = moduloDatos.extraerDatosReporte();
+            moduloDatos.extraerDatosReporte();
         } catch (IOException ex) {
             System.err.println(ex);
         }
-        double objetivo = Double.parseDouble((String) salidaExtraccionDatos.get(1).get(0));
-
-        /*numerar funciones objetivo de todo el problema*/
-        sltn.setObjective(0, objetivo);  //indice de fx objetivo , fx a optimizar
-
+        double objetivo;
+        /*funciones objetivo de todo el problema*/
+        for (int i = 0; i < CargaIDF.nObjetivos; i++) {
+            objetivo = moduloDatos.salidaExtraccionDatos.get(i).getValor();
+            sltn.setObjective(i, objetivo);  //indice de fx objetivo , fx a optimizar
+        }
     }
 
 }
