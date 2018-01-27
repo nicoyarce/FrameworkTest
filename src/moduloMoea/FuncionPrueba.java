@@ -21,7 +21,6 @@ public class FuncionPrueba extends AbstractProblem {
     public FuncionPrueba() throws FileNotFoundException, IOException {
         super(CargaIDF.nVariables, CargaIDF.nObjetivos);
         System.out.println("nVariables: " + CargaIDF.nVariables + " - " + "nObjetivos: " + CargaIDF.nObjetivos);
-
         //////Operaciones sobre IDF//////        
         moduloDatos.simularIDF();
         moduloDatos.extraerDatosReporte();
@@ -34,13 +33,13 @@ public class FuncionPrueba extends AbstractProblem {
         Solution solution = new Solution(CargaIDF.nVariables, CargaIDF.nObjetivos); //n variables totales , n de variables objetivo        
         // se fija dominio de busqueda por cada variable
         // dominio de busqueda basado en valores de idf
-        // primer caso: thickness        
+        // tambien basados en entrada de script python      
         double numero;
         double delta;
         for (int i = 0; i < CargaIDF.nVariables; i++) {
             numero = Double.parseDouble(moduloDatos.salidaAbrirIDF.get(i));
             delta = numero * 1.5;
-            delta = (double) Math.round(delta * 1000d) / 1000d;
+            delta = (double)Math.round(delta * 1000) / 1000;
             solution.setVariable(i, EncodingUtils.newReal(delta - numero, delta + numero));
         }
         return solution;
@@ -61,12 +60,13 @@ public class FuncionPrueba extends AbstractProblem {
         } catch (IOException ex) {
             System.err.println(ex);
         }
-        double objetivo;
+
         /*funciones objetivo de todo el problema*/
+        //arreglar seleccion de objetivos        
+        double objetivo;
         for (int i = 0; i < CargaIDF.nObjetivos; i++) {
             objetivo = moduloDatos.salidaExtraccionDatos.get(i).getValor();
             sltn.setObjective(i, objetivo);  //indice de fx objetivo , fx a optimizar
         }
     }
-
 }

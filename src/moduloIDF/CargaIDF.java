@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -12,24 +13,33 @@ import java.util.ArrayList;
 public class CargaIDF {
 
     public static String rutaIDF = "C:\\Users\\Usuario\\Downloads\\eppy-0.5.46\\caso_base_agosto.idf";
+    //variables estaticas por consturctor del framework moea
     public static int nVariables;
     public static int nObjetivos;
+    public ArrayList<Boolean> objetivos;
     public ArrayList<String> salidaAbrirIDF;
     public ArrayList<ValoresEnergeticos> salidaExtraccionDatos;
 
     public CargaIDF() throws IOException {
         abrirIDF();
         nVariables = salidaAbrirIDF.size();
-        nObjetivos = 1; //definido por usuarios?
+        //arraylist booleano para indicar cuales seran los objetivos a optimizar
+        /*  1 [Total Energy [kWh]/Total Site Energy]
+            2 [Total Energy [kWh]/Total Source Energy]
+            3 [District Heating [W]/Heating]
+            4 [District Cooling [W]/Cooling]
+            5 [Facility [Hours]/Time Setpoint Not Met During Occupied Heating]
+            6 [District Heating Intensity [kWh/m2]/HVAC]
+         */
+        objetivos = new ArrayList<>(Arrays.asList(true, false, false, false, false, false));
+        nObjetivos = 0;
+        for (Boolean opcion : objetivos) {
+            if (opcion) {
+                nObjetivos++;
+            }
+        }
     }
 
-    /*public static void main(String[] args) throws IOException {
-        CargaIDF test = new CargaIDF();       
-        for (ValoresEnergeticos valoresEnergeticos : test.extraerDatosReporte()) {
-            System.out.println(valoresEnergeticos.getTitulo());
-            System.out.println(valoresEnergeticos.getValor());
-        }     
-    }*/
     private void abrirIDF() throws IOException {
         String s = null;
         salidaAbrirIDF = new ArrayList<>();
@@ -73,7 +83,7 @@ public class CargaIDF {
                 //System.out.println(s);
             }
             // read any errors from the attempted command
-            //System.out.println("Here is the standard error of the command (if any):\n");
+            System.out.println("Here is the standard error of the command (if any):\n");
             while ((s = stdError.readLine()) != null) {
                 System.out.println(s);
             }
@@ -87,25 +97,31 @@ public class CargaIDF {
         salidaExtraccionDatos = new ArrayList<>();
         final String rutaScript = "src/python/lecturas_simulacion.py";
         int linea = 0;
-        int cantidadDatos = 5; //numero de valores de demanda energetica
         String s = null;
         try {
             Process p = Runtime.getRuntime().exec("python " + rutaScript + " " + rutaIDF);
             System.out.println("Extrayendo datos energeticos");
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-            // read the output from the command
-            //System.out.println("Here is the standard output of the command:\n");
-            //la salida del script primero imprime titulos y luego valores por eso el codigo esta asi
-            while ((s = stdInput.readLine()) != null) {
-                if (linea < cantidadDatos) {
-                    salidaExtraccionDatos.add(new ValoresEnergeticos(s, 0.0));
-                } else {
-                    //se calcula la linea a la que le corresponde el valor con su respectivo titulo
-                    salidaExtraccionDatos.get(linea - cantidadDatos).setValor(s);
+            // se fijan nombres de objetivos
+            ArrayList<String> titulos = new ArrayList<>(Arrays.asList(
+                    "[Total Energy [kWh]/Total Site Energy]",
+                    "[Total Energy [kWh]/Total Source Energy]",
+                    "[District Heating [W]/Heating]",
+                    "[District Cooling [W]/Cooling]",
+                    "[Facility [Hours]/Time Setpoint Not Met During Occupied Heating]",
+                    "[District Heating Intensity [kWh/m2]/HVAC]"));
+
+            while ((s = stdInput.readLine()) != null) {                
+                if(objetivos.get(linea)){
+                    salidaExtraccionDatos.add(new ValoresEnergeticos(titulos.get(linea), s));                    
                 }
-                linea++;
+                linea++;               
             }
+            for (ValoresEnergeticos dato : salidaExtraccionDatos) {
+                System.out.println(dato.getValor());
+            }
+                
             // read any errors from the attempted command
             //System.out.println("Here is the standard error of the command (if any):\n");
             while ((s = stdError.readLine()) != null) {

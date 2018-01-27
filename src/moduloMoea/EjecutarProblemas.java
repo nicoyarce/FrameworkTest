@@ -13,7 +13,6 @@ import org.moeaframework.core.variable.EncodingUtils;
 public class EjecutarProblemas {
 
     public static void main(String[] args) {
-
         NondominatedPopulation result = new Executor()
                 .withAlgorithm("NSGAII") //algoritmo a utilzar
                 //reemplazar nombre de clase

@@ -9,9 +9,9 @@ public class ValoresEnergeticos {
     private String titulo;
     private double valor;
 
-    public ValoresEnergeticos(String titulo, double valor) {
+    public ValoresEnergeticos(String titulo, String valor) {
         this.titulo = titulo;
-        this.valor = valor;
+        this.valor = Double.parseDouble(valor);
     }
 
     public String getTitulo() {

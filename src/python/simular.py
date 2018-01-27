@@ -1,3 +1,4 @@
+from eppy import modeleditor
 from eppy.modeleditor import IDF
 import sys
 pathnameto_eppy = '../'
