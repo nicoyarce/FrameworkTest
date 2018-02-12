@@ -25,11 +25,14 @@ public class FuncionPrueba extends AbstractProblem {
         moduloDatos.simularIDF();
         moduloDatos.extraerDatosReporte();
         System.out.println("Valores originales:");
-        System.out.println(moduloDatos.salidaAbrirIDF.get(0) + "=>" + moduloDatos.salidaExtraccionDatos.get(0).getValor());
+        System.out.println(moduloDatos.salidaExtraccionDatos.toString());
+        /*for (ValoresEnergeticos dato : moduloDatos.salidaExtraccionDatos) {
+            dato.toString();
+        }*/ 
     }
 
     @Override
-    public Solution newSolution() {
+    public synchronized Solution newSolution() {
         Solution solution = new Solution(CargaIDF.nVariables, CargaIDF.nObjetivos); //n variables totales , n de variables objetivo        
         // se fija dominio de busqueda por cada variable
         // dominio de busqueda basado en valores de idf
@@ -38,21 +41,23 @@ public class FuncionPrueba extends AbstractProblem {
         double delta;
         for (int i = 0; i < CargaIDF.nVariables; i++) {
             numero = Double.parseDouble(moduloDatos.salidaAbrirIDF.get(i));
+            //capturar output de la variable salidaAbrirIDF, cuando tenga valor rangomin rango max
             delta = numero * 1.5;
-            delta = (double)Math.round(delta * 1000) / 1000;
+            delta = truncar(delta);
             solution.setVariable(i, EncodingUtils.newReal(delta - numero, delta + numero));
         }
         return solution;
     }
 
     @Override
-    public void evaluate(Solution sltn) {
+    public synchronized void evaluate(Solution sltn) {
         /*variables de todo el problema */
         double variable;
         for (int i = 0; i < CargaIDF.nVariables; i++) {
             variable = EncodingUtils.getReal(sltn.getVariable(i));
+            variable = truncar(variable);
             modificaciones.add(String.valueOf(variable));
-        }
+        }        
         try {
             moduloDatos.modificarIDF(modificaciones);
             moduloDatos.simularIDF();
@@ -60,7 +65,6 @@ public class FuncionPrueba extends AbstractProblem {
         } catch (IOException ex) {
             System.err.println(ex);
         }
-
         /*funciones objetivo de todo el problema*/
         //arreglar seleccion de objetivos        
         double objetivo;
@@ -68,5 +72,10 @@ public class FuncionPrueba extends AbstractProblem {
             objetivo = moduloDatos.salidaExtraccionDatos.get(i).getValor();
             sltn.setObjective(i, objetivo);  //indice de fx objetivo , fx a optimizar
         }
+        modificaciones.clear();
+    }
+    private double truncar(double n){
+        n = (double)Math.round(n * 1000) / 1000;
+        return n;
     }
 }

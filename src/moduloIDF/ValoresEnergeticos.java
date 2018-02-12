@@ -34,4 +34,10 @@ public class ValoresEnergeticos {
         this.titulo = "";
         this.valor = 0.0;
     }
+
+    @Override
+    public String toString() {
+        return titulo+": "+valor;
+    }
+    
 }
