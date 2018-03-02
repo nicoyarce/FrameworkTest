@@ -20,6 +20,8 @@
 
 /nbproject/private/
 /dist/
+/optimización_*
+in.idf
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -37,7 +39,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/

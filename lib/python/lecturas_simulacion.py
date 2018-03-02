@@ -1,11 +1,14 @@
 from eppy.results import readhtml
 import sys
+import os
 pathnameto_eppy = '../'
 sys.path.append(pathnameto_eppy)
 
 lista_de_valores = []
-
-fname = 'C:\\Users\\Usuario\\Downloads\\eppy-0.5.46\\simulacion\\eplustbl.htm'  # archivo html valor
+archivoIDF = sys.argv[1]
+carpeta = os.path.join(os.path.dirname(archivoIDF),
+    "optimizacion_"+os.path.splitext(os.path.basename(archivoIDF))[0])
+fname = os.path.join(carpeta,"eplustbl.htm")  # archivo html valor
 filehandle = open(fname, 'r').read()  # get a file handle to the html file
 htables = readhtml.titletable(filehandle) # reads the tables with their titles
 
@@ -44,7 +47,8 @@ for valorEnergetico in valores:
     print(valorEnergetico)
 
 # GENERA ARCHIVO .TXT
-outfile = open('C:\\Users\\Usuario\\Downloads\\eppy-0.5.46\\simulacion\\values_file.txt', 'w')  # Indicamos el valor 'w'.
+rutaTxt = os.path.join(carpeta,"values_file.txt")
+outfile = open(rutaTxt, 'w')  # Indicamos el valor 'w'.
 outfile.write("\t")
 
 for z in range(0, len(header)):        

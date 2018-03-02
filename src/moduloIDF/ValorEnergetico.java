@@ -4,14 +4,16 @@ package moduloIDF;
  *
  * @author Nicoyarce
  */
-public class ValoresEnergeticos {
-
+public class ValorEnergetico {    
+    
     private String titulo;
     private double valor;
+    private boolean seleccionado;
 
-    public ValoresEnergeticos(String titulo, String valor) {
+    public ValorEnergetico(String titulo, String valor, boolean eleccion) {
         this.titulo = titulo;
         this.valor = Double.parseDouble(valor);
+        this.seleccionado = eleccion;
     }
 
     public String getTitulo() {
@@ -29,6 +31,14 @@ public class ValoresEnergeticos {
     public void setValor(String valor) {
         this.valor = Double.parseDouble(valor);
     }
+
+    public boolean isSeleccionado() {
+        return seleccionado;
+    }
+
+    public void setSeleccion(boolean eleccion) {
+        this.seleccionado = eleccion;
+    }  
 
     public void vaciar() {
         this.titulo = "";
