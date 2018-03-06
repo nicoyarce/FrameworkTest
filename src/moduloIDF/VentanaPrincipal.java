@@ -570,9 +570,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     objetivo5.isSelected(), objetivo6.isSelected()));
             ArrayList<Boolean> variables = new ArrayList(Arrays.asList(
                     variable1.isSelected()));
-            
+
             ejecutor = new EjecutarProblemas();
-            ejecutor.ejecutarOptimización(iddField.getText(), idfField.getText(), epwField.getText(), materialField.getText(), objetivos, variables);
+            ejecutor.ejecutarOptimizacion(iddField.getText(), idfField.getText(), epwField.getText(), materialField.getText(), objetivos, variables);
         };
         t = new Thread(myRun);
         t.start();
@@ -660,7 +660,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 || variable5.isSelected() || variable6.isSelected()
                 || variable7.isSelected();
     }*/
-
     /**
      * @param args the command line arguments
      */

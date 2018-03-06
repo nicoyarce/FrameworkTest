@@ -9,8 +9,8 @@ import org.moeaframework.problem.AbstractProblem;
  * @author Nicoyarce
  */
 //Problema con dos variables y un objetivo con restricciones
-public class Funcion2 extends AbstractProblem {    
-    public Funcion2() {
+public class FuncionConRestric extends AbstractProblem {    
+    public FuncionConRestric() {
         super(2, 1, 2); //n variables totales , n de variables objetivo, n de restricciones
     }
 

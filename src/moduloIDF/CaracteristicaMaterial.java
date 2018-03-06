@@ -10,6 +10,7 @@ package moduloIDF;
  * @author Nicoyarce
  */
 public class CaracteristicaMaterial {
+
     private String caracteristica;
     private double valor;
     private double rangoMin;
@@ -22,7 +23,7 @@ public class CaracteristicaMaterial {
         this.rangoMin = rangoMin;
         this.rangoMax = rangoMax;
         this.seleccionado = seleccionado;
-    }  
+    }
 
     public String getCaracteristica() {
         return caracteristica;
@@ -64,5 +65,4 @@ public class CaracteristicaMaterial {
         this.seleccionado = seleccionado;
     }
 
-    
 }

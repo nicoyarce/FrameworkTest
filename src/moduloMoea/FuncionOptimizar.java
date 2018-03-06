@@ -14,12 +14,12 @@ import org.moeaframework.problem.AbstractProblem;
  * @author Nicoyarce
  */
 //Funcion de optimizacion de archivos IDF
-public class FuncionPrueba extends AbstractProblem {
+public class FuncionOptimizar extends AbstractProblem {
 
     public ArrayList<String> modificaciones = new ArrayList<>();
     public CargaIDF cargaIDF;
 
-    public FuncionPrueba(CargaIDF cargaIDF) throws FileNotFoundException, IOException {
+    public FuncionOptimizar(CargaIDF cargaIDF) throws FileNotFoundException, IOException {
         super(CargaIDF.nVariables, CargaIDF.nObjetivos);
         this.cargaIDF = cargaIDF;
         System.out.println("nVariables: " + CargaIDF.nVariables + " - " + "nObjetivos: " + CargaIDF.nObjetivos);
@@ -44,8 +44,8 @@ public class FuncionPrueba extends AbstractProblem {
         for (int i = 0; i < CargaIDF.nVariables; i++) {
             //usar output de la variable salidaAbrirIDF
             double minimo = cargaIDF.salidaAbrirIDF.get(i).getRangoMin();
-            double maximo = cargaIDF.salidaAbrirIDF.get(i).getRangoMax();   
-            solution.setVariable(i, EncodingUtils.newReal(minimo, maximo));            
+            double maximo = cargaIDF.salidaAbrirIDF.get(i).getRangoMax();
+            solution.setVariable(i, EncodingUtils.newReal(minimo, maximo));
         }
         return solution;
     }
@@ -76,5 +76,4 @@ public class FuncionPrueba extends AbstractProblem {
         modificaciones.clear();
     }
 
-    
 }

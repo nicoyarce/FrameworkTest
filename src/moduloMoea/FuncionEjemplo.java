@@ -10,13 +10,13 @@ import org.moeaframework.problem.AbstractProblem;
  */
 
 //Problema con dos variables y con dos objetivos
-public class Funcion1 extends AbstractProblem {
+public class FuncionEjemplo extends AbstractProblem {
 
     int constructor = 0;
     int evaluate = 0;
     int newSolution = 0;
 
-    public Funcion1() {
+    public FuncionEjemplo() {
         super(2, 2); //n variables totales , n de variables objetivo
         constructor++;
         System.out.println("Constructor" + constructor);

@@ -4,8 +4,8 @@ package moduloIDF;
  *
  * @author Nicoyarce
  */
-public class ValorEnergetico {    
-    
+public class ValorEnergetico {
+
     private String titulo;
     private double valor;
     private boolean seleccionado;
@@ -38,7 +38,7 @@ public class ValorEnergetico {
 
     public void setSeleccion(boolean eleccion) {
         this.seleccionado = eleccion;
-    }  
+    }
 
     public void vaciar() {
         this.titulo = "";
@@ -47,7 +47,7 @@ public class ValorEnergetico {
 
     @Override
     public String toString() {
-        return titulo+": "+valor;
+        return titulo + ": " + valor;
     }
-    
+
 }

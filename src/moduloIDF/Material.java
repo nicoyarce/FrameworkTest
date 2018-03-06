@@ -10,6 +10,7 @@ package moduloIDF;
  * @author Nicoyarce
  */
 public class Material {
+
     private String name;
     private String roughness;
     private CaracteristicaMaterial thickness;
@@ -20,5 +21,4 @@ public class Material {
     private CaracteristicaMaterial solarAbsorptance;
     private CaracteristicaMaterial visibleAbsorptance;
 
-    
 }

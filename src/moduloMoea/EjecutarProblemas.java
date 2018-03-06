@@ -78,7 +78,7 @@ public class EjecutarProblemas {
             System.out.println("Se optimizaran valores de Thickness");
             entrada.close();
             if (objetivos.contains(true)) {
-                test.ejecutarOptimización(args[0], args[1], args[2], args[3], objetivos, eleccionCaracteristicas);
+                test.ejecutarOptimizacion(args[0], args[1], args[2], args[3], objetivos, eleccionCaracteristicas);
             } else {
                 System.out.println("No se eligieron objetivos");
                 System.exit(0);
@@ -89,7 +89,7 @@ public class EjecutarProblemas {
         }
     }
 
-    public void ejecutarOptimización(String rutaIDD, String rutaIDF, String rutaEPW, String rutaMateriales, ArrayList<Boolean> objetivos, ArrayList<Boolean> eleccionCaracteristicas) {
+    public void ejecutarOptimizacion(String rutaIDD, String rutaIDF, String rutaEPW, String rutaMateriales, ArrayList<Boolean> objetivos, ArrayList<Boolean> eleccionCaracteristicas) {
         try {
             cargaIDF = new CargaIDF(rutaIDD, rutaIDF, rutaEPW, rutaMateriales, objetivos, eleccionCaracteristicas);
         } catch (IOException ex) {
@@ -99,7 +99,7 @@ public class EjecutarProblemas {
         NondominatedPopulation result = exec
                 .withAlgorithm("NSGAII") //algoritmo a utilzar
                 /*reemplazar nombre de clase*/
-                .withProblemClass(FuncionPrueba.class, cargaIDF) //clase donde esta el problema
+                .withProblemClass(FuncionOptimizar.class, cargaIDF) //clase donde esta el problema
                 .withMaxEvaluations(5) //cantidad de evaluaciones
                 .withProperty("populationSize", 5) //numero poblacion, por defecto 100 en NSGAII
                 //.withInstrumenter(instrumenter)
@@ -117,12 +117,12 @@ public class EjecutarProblemas {
         for (Solution solution : result) {
             opcion++;
             System.out.println("------Opcion " + opcion + "------");
-            System.out.println("---Objetivos---");            
+            System.out.println("---Objetivos---");
             for (int i = 0; i < solution.getNumberOfObjectives(); i++) {
                 //System.out.printf("%.2f\n", solution.getObjective(i));
                 variablesFinales.add(solution.getObjective(i));
             }
-            int j=0;
+            int j = 0;
             for (int i = 0; i < cargaIDF.salidaExtraccionDatos.size(); i++) {
                 if (cargaIDF.salidaExtraccionDatos.get(i).isSeleccionado()) {
                     cargaIDF.salidaExtraccionDatos.get(i).setSeleccion(false);
@@ -137,7 +137,7 @@ public class EjecutarProblemas {
                 double var = cargaIDF.truncar(EncodingUtils.getReal(solution.getVariable(i)));
                 objetivosFinales.add(var);
             }
-            j=0;
+            j = 0;
             for (int i = 0; i < cargaIDF.salidaAbrirIDF.size(); i++) {
                 if (cargaIDF.salidaAbrirIDF.get(i).isSeleccionado()) {
                     cargaIDF.salidaAbrirIDF.get(i).setSeleccionado(false);

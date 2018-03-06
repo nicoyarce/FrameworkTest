@@ -75,7 +75,7 @@ public class CargaIDF {
             // read the output from the command
             //System.out.println("Here is the standard output of the command:\n");
             String[] linea;
-            
+
             while ((s = stdInput.readLine()) != null) {
                 //linea[] = nombre, valor, rangomin, rangomax, rangominEstricto, rangoMaxEstricto
                 linea = s.split("%");
@@ -99,7 +99,7 @@ public class CargaIDF {
                 } else {
                     rangoMax = delta + numero;
                 }
-                salidaAbrirIDF.add(new CaracteristicaMaterial(linea[0], numero, rangoMin, rangoMax, true));  
+                salidaAbrirIDF.add(new CaracteristicaMaterial(linea[0], numero, rangoMin, rangoMax, true));
             }
             p.waitFor();
 
@@ -187,7 +187,7 @@ public class CargaIDF {
             if (caracteristicaMaterial.isSeleccionado()) {
                 valores = valores.concat(modificaciones.get(i) + " ");
             }
-        }        
+        }
         try {
             String cmd = "python " + rutaScript + " " + rutaIDD + " " + rutaIDF
                     + " " + rutaMateriales + " " + valores;
