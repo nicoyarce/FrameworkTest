@@ -1,4 +1,4 @@
-package moduloIDF;
+package moduloEP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 escrita en python. Esta comunicacion desde python a java se hace por salida
 estandar, por otro lado la comunicacion desde java a python se hace a traves de
 la entrega de parametros al momento de ejecutar el comando python*/
-public class CargaIDF {
+public class CargaEP {
 
     private String rutaIDD = "";
     private String rutaIDF = "";
@@ -26,7 +26,7 @@ public class CargaIDF {
     public ArrayList<CaracteristicaMaterial> salidaAbrirIDF = new ArrayList<>();
     public ArrayList<ValorEnergetico> salidaExtraccionDatos = new ArrayList<>();
 
-    public CargaIDF(String rutaIDD, String rutaIDF, String rutaEPW, String rutaMaeriales, ArrayList<Boolean> objetivos, ArrayList<Boolean> eleccionCaracteristicas) throws IOException {
+    public CargaEP(String rutaIDD, String rutaIDF, String rutaEPW, String rutaMaeriales, ArrayList<Boolean> objetivos, ArrayList<Boolean> eleccionCaracteristicas) throws IOException {
         ArrayList<String> titulosEnergeticos = new ArrayList<>(Arrays.asList(
                 "[Total Energy [kWh]/Total Site Energy]",
                 "[Total Energy [kWh]/Total Source Energy]",

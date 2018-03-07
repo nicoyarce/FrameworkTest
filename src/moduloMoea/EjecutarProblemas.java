@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import moduloIDF.CargaIDF;
+import moduloEP.CargaEP;
 import org.moeaframework.Executor;
 import org.moeaframework.core.NondominatedPopulation;
 import org.moeaframework.core.Solution;
@@ -17,7 +17,7 @@ import org.moeaframework.core.variable.EncodingUtils;
 public class EjecutarProblemas {
 
     public Executor exec;
-    public CargaIDF cargaIDF;
+    public CargaEP cargaIDF;
     //public static boolean fin = false;
 
     public static void main(String[] args) {
@@ -91,7 +91,7 @@ public class EjecutarProblemas {
 
     public void ejecutarOptimizacion(String rutaIDD, String rutaIDF, String rutaEPW, String rutaMateriales, ArrayList<Boolean> objetivos, ArrayList<Boolean> eleccionCaracteristicas) {
         try {
-            cargaIDF = new CargaIDF(rutaIDD, rutaIDF, rutaEPW, rutaMateriales, objetivos, eleccionCaracteristicas);
+            cargaIDF = new CargaEP(rutaIDD, rutaIDF, rutaEPW, rutaMateriales, objetivos, eleccionCaracteristicas);
         } catch (IOException ex) {
             System.err.println(ex);
         }

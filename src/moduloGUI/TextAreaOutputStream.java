@@ -1,4 +1,4 @@
-package moduloIDF;
+package moduloGUI;
 
 import java.awt.*;
 import java.io.*;
