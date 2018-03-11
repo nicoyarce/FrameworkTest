@@ -23,10 +23,10 @@ public class CargaEP {
     //variables estaticas por constructor del framework moea
     public static int nVariables;
     public static int nObjetivos;
-    public ArrayList<CaracteristicaMaterial> salidaAbrirIDF = new ArrayList<>();
-    public ArrayList<ValorEnergetico> salidaExtraccionDatos = new ArrayList<>();
+    public ArrayList<Material> listaMateriales = new ArrayList<>();
+    public ArrayList<ValorEnergetico> listaValoresEnergeticos = new ArrayList<>();
 
-    public CargaEP(String rutaIDD, String rutaIDF, String rutaEPW, String rutaMaeriales, ArrayList<Boolean> objetivos, ArrayList<Boolean> eleccionCaracteristicas) throws IOException {
+    public CargaEP(String rutaIDD, String rutaIDF, String rutaEPW, String rutaMateriales, ArrayList<Boolean> objetivos, ArrayList<Boolean> eleccionCaracteristicas) throws IOException {
         ArrayList<String> titulosEnergeticos = new ArrayList<>(Arrays.asList(
                 "[Total Energy [kWh]/Total Site Energy]",
                 "[Total Energy [kWh]/Total Source Energy]",
@@ -36,22 +36,25 @@ public class CargaEP {
                 "[District Heating Intensity [kWh/m2]/HVAC]"));
         int i = 0;
         for (String titulo : titulosEnergeticos) {
-            salidaExtraccionDatos.add(i, new ValorEnergetico(titulo, "-1", objetivos.get(i)));
+            listaValoresEnergeticos.add(i, new ValorEnergetico(titulo, "-1", objetivos.get(i)));
             i++;
         }
         this.rutaIDD = rutaIDD;
         this.rutaIDF = rutaIDF;
         this.rutaEPW = rutaEPW;
-        this.rutaMateriales = rutaMaeriales;
-        abrirIDF();
+        this.rutaMateriales = rutaMateriales;
+        abrirIDF(eleccionCaracteristicas);
         nVariables = 0;
-        for (CaracteristicaMaterial variable : salidaAbrirIDF) {
-            if (variable.isSeleccionado()) {
-                nVariables++;
+        for (int j = 0; j < listaMateriales.size(); j++) {
+            for (int k = 0; k < listaMateriales.get(j).getCaracteristicas().size(); k++) {
+                if (listaMateriales.get(j).getCaracteristicas(k).isSeleccionado()) {
+                    nVariables++;
+                }
             }
         }
+
         nObjetivos = 0;
-        for (ValorEnergetico objetivo : salidaExtraccionDatos) {
+        for (ValorEnergetico objetivo : listaValoresEnergeticos) {
             if (objetivo.isSeleccionado()) {
                 nObjetivos++;
             }
@@ -60,9 +63,9 @@ public class CargaEP {
 
     /*Abre archivo idf y captura salida estandar del script python que muestra
     las variables a optimizar*/
-    private void abrirIDF() {
+    private void abrirIDF(ArrayList<Boolean> eleccionCaracteristicas) {
         String s = null;
-        salidaAbrirIDF = new ArrayList<>();
+        listaMateriales = new ArrayList<>();
         String rutaScript = "lib/python/abrirIDF.py";
 
         try {
@@ -72,34 +75,48 @@ public class CargaEP {
             System.out.println("Abriendo IDF");
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-            // read the output from the command
-            //System.out.println("Here is the standard output of the command:\n");
+
+            String nombre = "", roughness = "";
             String[] linea;
-
+            ArrayList<CaracteristicaMaterial> temporal = new ArrayList<>();
+            int nCaracteristica = 0;
             while ((s = stdInput.readLine()) != null) {
-                //linea[] = nombre, valor, rangomin, rangomax, rangominEstricto, rangoMaxEstricto
-                linea = s.split("%");
-                double numero, delta, rangoMin, rangoMax;
-                numero = Double.parseDouble(linea[1]);
-                delta = numero * 1.5;
-                delta = truncar(delta);
-
-                if (!linea[2].equalsIgnoreCase("None")) {
-                    rangoMin = Double.parseDouble(linea[2]);
-                } else if (!linea[4].equalsIgnoreCase("None")) {
-                    rangoMin = Double.parseDouble(linea[4]);
+                if (s.startsWith("N:")) {
+                    nombre = s.substring(2);
+                } else if (s.startsWith("R:")) {
+                    roughness = s.substring(2);
+                } else if (s.contains("---")) {
+                    listaMateriales.add(new Material(nombre, roughness, new ArrayList(temporal)));
+                    nombre = "";
+                    roughness = "";
+                    temporal.clear();
+                    nCaracteristica = 0;
                 } else {
-                    rangoMin = delta - numero;
-                }
+                    //linea[] = nombre, valor, rangomin, rangomax, rangominEstricto, rangoMaxEstricto
+                    linea = s.split("%");
+                    double numero, delta, rangoMin, rangoMax;
+                    numero = Double.parseDouble(linea[1]);
+                    delta = numero * 1.5;
+                    delta = truncar(delta);
 
-                if (!linea[3].equalsIgnoreCase("None")) {
-                    rangoMax = Double.parseDouble(linea[3]);
-                } else if (!linea[5].equalsIgnoreCase("None")) {
-                    rangoMax = Double.parseDouble(linea[5]);
-                } else {
-                    rangoMax = delta + numero;
+                    if (!linea[2].equalsIgnoreCase("None")) {
+                        rangoMin = Double.parseDouble(linea[2]);
+                    } else if (!linea[4].equalsIgnoreCase("None")) {
+                        rangoMin = Double.parseDouble(linea[4]);
+                    } else {
+                        rangoMin = delta - numero;
+                    }
+
+                    if (!linea[3].equalsIgnoreCase("None")) {
+                        rangoMax = Double.parseDouble(linea[3]);
+                    } else if (!linea[5].equalsIgnoreCase("None")) {
+                        rangoMax = Double.parseDouble(linea[5]);
+                    } else {
+                        rangoMax = delta + numero;
+                    }
+                    temporal.add(new CaracteristicaMaterial(linea[0], numero, rangoMin, rangoMax, eleccionCaracteristicas.get(nCaracteristica)));
+                    nCaracteristica++;
                 }
-                salidaAbrirIDF.add(new CaracteristicaMaterial(linea[0], numero, rangoMin, rangoMax, true));
             }
             p.waitFor();
 
@@ -160,7 +177,7 @@ public class CargaEP {
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
             while ((s = stdInput.readLine()) != null) {
-                salidaExtraccionDatos.get(i).setValor(s);
+                listaValoresEnergeticos.get(i).setValor(s);
                 i++;
             }
             p.waitFor();
@@ -183,9 +200,14 @@ public class CargaEP {
         final String rutaScript = "lib/python/modificarIDF.py";
         String valores = "";
         int i = 0;
-        for (CaracteristicaMaterial caracteristicaMaterial : salidaAbrirIDF) {
-            if (caracteristicaMaterial.isSeleccionado()) {
-                valores = valores.concat(modificaciones.get(i) + " ");
+        for (int j = 0; j < listaMateriales.size(); j++) {
+            for (int k = 0; k < listaMateriales.get(j).getCaracteristicas().size(); k++) {
+                if (listaMateriales.get(j).getCaracteristicas(k).isSeleccionado()) {
+                    valores = valores.concat(modificaciones.get(i) + " ");
+                    i++;
+                } else {
+                    valores = valores.concat(String.valueOf(listaMateriales.get(j).getCaracteristicas(k).getValor() + " "));
+                }
             }
         }
         try {

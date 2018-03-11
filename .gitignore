@@ -22,6 +22,8 @@
 /dist/
 /optimizacion_*
 in.idf
+ultimasRutas.txt
+caso_base_agosto.idf
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

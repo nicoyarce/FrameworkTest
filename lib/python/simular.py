@@ -11,5 +11,7 @@ archivoEPW = sys.argv[3]
 
 IDF.setiddname(archivoIDD)
 idf = IDF(archivoIDF, archivoEPW)
-nuevaCarpeta = "optimizacion_"+os.path.splitext(os.path.basename(archivoIDF))[0]
-idf.run(output_directory= os.path.join(os.path.dirname(archivoIDF), nuevaCarpeta))
+nuevaCarpeta = "optimizacion_" + \
+    os.path.splitext(os.path.basename(archivoIDF))[0]
+idf.run(output_directory=os.path.join(
+    os.path.dirname(archivoIDF), nuevaCarpeta))

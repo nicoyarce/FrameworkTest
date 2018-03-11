@@ -6171,7 +6171,7 @@ Schedule:Compact,
 Material,
     1_1_37,                   !- Name
     Rough,                    !- Roughness
-    0.11,                     !- Thickness
+    0.17,                     !- Thickness
     0.04,                     !- Conductivity
     10.0,                     !- Density
     1400.0,                   !- Specific Heat
@@ -6182,7 +6182,7 @@ Material,
 Material,
     1_2_9,                    !- Name
     Rough,                    !- Roughness
-    0.11,                     !- Thickness
+    0.1,                      !- Thickness
     1.13,                     !- Conductivity
     2000.0,                   !- Density
     1000.0,                   !- Specific Heat
@@ -6193,7 +6193,7 @@ Material,
 Material,
     1_3_29,                   !- Name
     Rough,                    !- Roughness
-    0.11,                     !- Thickness
+    0.07,                     !- Thickness
     0.41,                     !- Conductivity
     1200.0,                   !- Density
     840.0,                    !- Specific Heat
@@ -6215,7 +6215,7 @@ Material,
 Material,
     3_1_165,                  !- Name
     Rough,                    !- Roughness
-    0.11,                     !- Thickness
+    0.025,                    !- Thickness
     110.0,                    !- Conductivity
     7200.0,                   !- Density
     380.0,                    !- Specific Heat
@@ -6226,7 +6226,7 @@ Material,
 Material,
     3_2_4134,                 !- Name
     Rough,                    !- Roughness
-    0.11,                     !- Thickness
+    0.01,                     !- Thickness
     1.0,                      !- Conductivity
     120.0,                    !- Density
     1674.0,                   !- Specific Heat
@@ -6237,7 +6237,7 @@ Material,
 Material,
     5_1_27,                   !- Name
     Rough,                    !- Roughness
-    0.11,                     !- Thickness
+    0.015,                    !- Thickness
     0.25,                     !- Conductivity
     900.0,                    !- Density
     1000.0,                   !- Specific Heat
@@ -6248,7 +6248,7 @@ Material,
 Material,
     7_1_5134,                 !- Name
     Rough,                    !- Roughness
-    0.11,                     !- Thickness
+    0.015,                    !- Thickness
     0.72,                     !- Conductivity
     1860.0,                   !- Density
     840.0,                    !- Specific Heat
@@ -6259,7 +6259,7 @@ Material,
 Material,
     7_2_5122,                 !- Name
     Rough,                    !- Roughness
-    0.11,                     !- Thickness
+    0.15,                     !- Thickness
     0.72,                     !- Conductivity
     1920.0,                   !- Density
     840.0,                    !- Specific Heat
@@ -6270,7 +6270,7 @@ Material,
 Material,
     9_1_108,                  !- Name
     Rough,                    !- Roughness
-    0.11,                     !- Thickness
+    0.23,                     !- Thickness
     0.19,                     !- Conductivity
     700.0,                    !- Density
     2390.0,                   !- Specific Heat

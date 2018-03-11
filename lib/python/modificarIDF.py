@@ -10,23 +10,26 @@ IDF.setiddname(archivoIDD)
 idf = IDF(archivoIDF)
 materiales = idf.idfobjects['MATERIAL']
 
+modificaciones = []
+
+for argumento in sys.argv[4:]:
+    modificaciones.append(argumento)
+
 archivoMateriales = open(rutaMateriales, "r")
 listaMateriales = archivoMateriales.read().splitlines()
-i = 0;
+i = 0
 for linea in listaMateriales:
     for material in materiales:
         if(str(material.Name) == linea):
-            material.Thickness = sys.argv[i + 4]
-            '''
-            material.Conductivity = sys.argv[i + 5]
-            material.Density = sys.argv[i + 6]
-            material.Specific_Heat = sys.argv[i + 7]
-            material.Thermal_Absorptance = sys.argv[i + 8]
-            material.Solar_Absorptance = sys.argv[i + 9]
-            material.Visible_Absorptance = sys.argv[i + 10]
-            '''
-            break
-    i += 1
-archivoMateriales.close() 
+            material.Thickness = modificaciones[i]
+            material.Conductivity = modificaciones[i + 1]
+            material.Density = modificaciones[i + 2]
+            material.Specific_Heat = modificaciones[i + 3]
+            material.Thermal_Absorptance = modificaciones[i + 4]
+            material.Solar_Absorptance = modificaciones[i + 5]
+            material.Visible_Absorptance = modificaciones[i + 6]
+    i += 7
 
+
+archivoMateriales.close()
 idf.save()

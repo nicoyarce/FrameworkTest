@@ -11,14 +11,14 @@ package moduloEP;
  */
 public class CaracteristicaMaterial {
 
-    private String caracteristica;
+    private String nombreCaracteristica;
     private double valor;
     private double rangoMin;
     private double rangoMax;
     private boolean seleccionado;
 
-    public CaracteristicaMaterial(String caracteristica, double valor, double rangoMin, double rangoMax, boolean seleccionado) {
-        this.caracteristica = caracteristica;
+    public CaracteristicaMaterial(String nombreCaracteristica, double valor, double rangoMin, double rangoMax, boolean seleccionado) {
+        this.nombreCaracteristica = nombreCaracteristica;
         this.valor = valor;
         this.rangoMin = rangoMin;
         this.rangoMax = rangoMax;
@@ -26,11 +26,11 @@ public class CaracteristicaMaterial {
     }
 
     public String getCaracteristica() {
-        return caracteristica;
+        return nombreCaracteristica;
     }
 
-    public void setCaracteristica(String caracteristica) {
-        this.caracteristica = caracteristica;
+    public void setCaracteristica(String nombreCaracteristica) {
+        this.nombreCaracteristica = nombreCaracteristica;
     }
 
     public double getValor() {

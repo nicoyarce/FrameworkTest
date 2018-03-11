@@ -27,10 +27,10 @@ public class FuncionOptimizar extends AbstractProblem {
         this.cargaIDF.simularIDF();
         this.cargaIDF.extraerDatosReporte();
         System.out.println("Valores originales:");
-        for (ValorEnergetico salidaExtraccionDato : cargaIDF.salidaExtraccionDatos) {
+        for (ValorEnergetico salidaExtraccionDato : cargaIDF.listaValoresEnergeticos) {
             System.out.println(salidaExtraccionDato);
         }
-        /*for (ValoresEnergeticos dato : moduloDatos.salidaExtraccionDatos) {
+        /*for (ValoresEnergeticos dato : moduloDatos.listaValoresEnergeticos) {
             dato.toString();
         }*/
     }
@@ -42,10 +42,12 @@ public class FuncionOptimizar extends AbstractProblem {
         // dominio de busqueda basado en valores de idf
         // tambien basados en entrada de script python       
         for (int i = 0; i < CargaEP.nVariables; i++) {
-            //usar output de la variable salidaAbrirIDF
-            double minimo = cargaIDF.salidaAbrirIDF.get(i).getRangoMin();
-            double maximo = cargaIDF.salidaAbrirIDF.get(i).getRangoMax();
-            solution.setVariable(i, EncodingUtils.newReal(minimo, maximo));
+            for (int j = 0; j < cargaIDF.listaMateriales.get(i).getCaracteristicas().size(); j++) {
+                //usar output de la variable listaMateriales
+                double minimo = cargaIDF.listaMateriales.get(i).getCaracteristicas(j).getRangoMin();
+                double maximo = cargaIDF.listaMateriales.get(i).getCaracteristicas(j).getRangoMax();
+                solution.setVariable(i, EncodingUtils.newReal(minimo, maximo));
+            }
         }
         return solution;
     }
@@ -70,7 +72,7 @@ public class FuncionOptimizar extends AbstractProblem {
         //arreglar seleccion de objetivos        
         double objetivo;
         for (int i = 0; i < CargaEP.nObjetivos; i++) {
-            objetivo = cargaIDF.salidaExtraccionDatos.get(i).getValor();
+            objetivo = cargaIDF.listaValoresEnergeticos.get(i).getValor();
             sltn.setObjective(i, objetivo);  //indice de fx objetivo , fx a optimizar
         }
         modificaciones.clear();

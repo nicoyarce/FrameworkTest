@@ -1,9 +1,27 @@
 package moduloGUI;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -30,7 +48,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         camposListos = new ArrayList<>(Arrays.asList(false, false, false, false));
         initComponents();
-        jPanel4.setVisible(false);
+        variable1.setSelected(true);
+        leerArchivo(new File("ultimasRutas.txt"));
+        comprobarComponentesGUI();
     }
 
     /**
@@ -161,53 +181,50 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(epwLabel)
                                 .addComponent(idfLabel)
                                 .addComponent(iddLabel))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(epwField, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(idfField, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(iddField, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(materialField, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
-                            .addGap(18, 18, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(boton2Carga, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                .addComponent(boton1Carga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(boton3Carga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(boton4Carga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGap(73, 73, 73))
+                            .addGap(31, 31, 31)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(boton2Carga)
+                                .addComponent(boton3Carga)
+                                .addComponent(boton1Carga)
+                                .addComponent(boton4Carga))
+                            .addGap(12, 12, 12))))
             );
             jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(tituloLabel)
-                    .addGap(13, 13, 13)
+                    .addGap(12, 12, 12)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(iddLabel)
+                        .addComponent(iddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boton1Carga))
+                    .addGap(16, 16, 16)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(idfLabel)
+                        .addComponent(idfField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boton2Carga))
+                    .addGap(15, 15, 15)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(1, 1, 1)
-                            .addComponent(boton1Carga))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(iddLabel)
-                                .addComponent(iddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(idfLabel)
-                                .addComponent(idfField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(boton2Carga))
-                            .addGap(15, 15, 15)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(4, 4, 4)
-                                    .addComponent(epwLabel))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(epwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(boton3Carga)))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(materialLabel)
-                                .addComponent(materialField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(boton4Carga))))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(4, 4, 4)
+                            .addComponent(epwLabel))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(epwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(boton3Carga)))
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(boton4Carga)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(materialLabel)
+                            .addComponent(materialField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(55, Short.MAX_VALUE))
             );
 
             jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -217,6 +234,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             salidaTextArea.setRows(5);
             salidaTextArea.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
             jScrollPane1.setViewportView(salidaTextArea);
+            PrintStream con=new PrintStream(new TextAreaOutputStream(salidaTextArea));
+            System.setOut(con);
+            System.setErr(con);
 
             salidaLabel.setText("Salida");
 
@@ -328,7 +348,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(objetivo5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(objetivo6)
-                    .addContainerGap(18, Short.MAX_VALUE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
 
             jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -437,16 +457,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(botonOptimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addContainerGap(20, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(18, 18, Short.MAX_VALUE)
+                            .addComponent(botonOptimizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             );
             layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -459,9 +483,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, 207, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(botonOptimizar)
+                            .addComponent(botonOptimizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGap(0, 6, Short.MAX_VALUE)))
                     .addContainerGap())
             );
@@ -483,7 +507,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             iddField.setText("Ruta IDD");
             camposListos.set(0, false);
         }
-        comprobarCampos(iddField, ".idd", 0);
+        comprobarCampos(iddField, 0);
         comprobarComponentesGUI();
     }//GEN-LAST:event_boton1CargaActionPerformed
 
@@ -500,7 +524,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             idfField.setText("Ruta IDF");
             camposListos.set(1, false);
         }
-        comprobarCampos(idfField, ".idf", 1);
+        comprobarCampos(idfField, 1);
         comprobarComponentesGUI();
     }//GEN-LAST:event_boton2CargaActionPerformed
 
@@ -517,7 +541,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             epwField.setText("Ruta EPW");
             camposListos.set(2, false);
         }
-        comprobarCampos(epwField, ".epw", 2);
+        comprobarCampos(epwField, 2);
         comprobarComponentesGUI();
     }//GEN-LAST:event_boton3CargaActionPerformed
 
@@ -534,13 +558,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             materialField.setText("Ruta Materiales");
             camposListos.set(3, false);
         }
-        comprobarCampos(materialField, ".txt", 3);
+        comprobarCampos(materialField, 3);
         comprobarComponentesGUI();
     }//GEN-LAST:event_boton4CargaActionPerformed
-    /*Comprueba si la extension de los archivos es correcta*/
-    private void comprobarCampos(JTextField field, String extension, int nroCampo) {
+    /*Comprueba si la extension de los archivos es correcta*/        
+    private void comprobarCampos(JTextField field, int nroCampo) {        
+        String extension = field.getText().substring(field.getText().lastIndexOf("."));                
         if (field.getText().endsWith(extension)
                 || field.getText().endsWith(extension.toUpperCase())) {
+            camposListos.set(nroCampo, true);
             field.setBackground(verde);
         } else {
             camposListos.set(nroCampo, false);
@@ -550,15 +576,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     /*Comprueba los componentes de la GUI para habilitar o no el boton optimizar*/
     private void comprobarComponentesGUI() {
-        if (camposListos.get(0) && camposListos.get(1) && camposListos.get(2) && camposListos.get(3) && unObjetivoMarcado()) {
+        if (camposListos.get(0) && camposListos.get(1) && camposListos.get(2) && camposListos.get(3) && unObjetivoMarcado() && unaVariableMarcada()) {
             botonOptimizar.setEnabled(true);
         } else {
             botonOptimizar.setEnabled(false);
-
         }
     }
 
     private void botonOptimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOptimizarActionPerformed
+        guardarRutas();
         Runnable myRun;
         myRun = () -> {
             ArrayList<Boolean> objetivos = new ArrayList(Arrays.asList(
@@ -566,7 +592,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     objetivo3.isSelected(), objetivo4.isSelected(),
                     objetivo5.isSelected(), objetivo6.isSelected()));
             ArrayList<Boolean> variables = new ArrayList(Arrays.asList(
-                    variable1.isSelected()));
+                    variable1.isSelected(), variable2.isSelected(),
+                    variable3.isSelected(), variable4.isSelected(),
+                    variable5.isSelected(), variable6.isSelected(),
+                    variable7.isSelected()));
 
             ejecutor = new EjecutarProblemas();
             ejecutor.ejecutarOptimizacion(iddField.getText(), idfField.getText(), epwField.getText(), materialField.getText(), objetivos, variables);
@@ -583,14 +612,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         objetivo4.setEnabled(false);
         objetivo5.setEnabled(false);
         objetivo6.setEnabled(false);
-        /*variable1.setEnabled(false);
+        variable1.setEnabled(false);
         variable2.setEnabled(false);
         variable3.setEnabled(false);
         variable4.setEnabled(false);
         variable5.setEnabled(false);
         variable6.setEnabled(false);
-        variable7.setEnabled(false);*/
+        variable7.setEnabled(false);
         botonOptimizar.setEnabled(false);
+
     }//GEN-LAST:event_botonOptimizarActionPerformed
 
     private void objetivo1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_objetivo1StateChanged
@@ -651,12 +681,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 || objetivo5.isSelected() || objetivo6.isSelected();
     }
 
-    /*private boolean unaVariableMarcada() {
+    private boolean unaVariableMarcada() {
         return variable1.isSelected() || variable2.isSelected()
-                || variable3.isSelected() || variable4.isSelected() 
+                || variable3.isSelected() || variable4.isSelected()
                 || variable5.isSelected() || variable6.isSelected()
                 || variable7.isSelected();
-    }*/
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -674,8 +705,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     break;
                 }
             }*/
+
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -735,13 +768,41 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JCheckBox variable7;
     // End of variables declaration//GEN-END:variables
 
-    /*private void guardarRutas() throws FileNotFoundException, UnsupportedEncodingException {
-        String rutaPrograma = System.getProperty("user.dir");
-        try (PrintWriter writer = new PrintWriter(rutaPrograma+"/ultimasRutas.txt", "UTF-8")) {
-            writer.println(iddField.getText());
-            writer.println(idfField.getText());
-            writer.println(epwField.getText());
-            writer.println(materialField.getText());
+    private void guardarRutas() {
+        try {
+            List<String> lines = Arrays.asList(iddField.getText(), idfField.getText(), epwField.getText(), materialField.getText());
+            Path file = Paths.get("ultimasRutas.txt");
+            Files.write(file, lines, Charset.forName("UTF-8"));
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }*/
+    }
+
+    private void leerArchivo(File archivo) {
+        if (archivo.exists() && archivo.length() > 0) {
+            FileReader f = null;
+            try {
+                ArrayList<String> listaArchivos = new ArrayList<>();
+                String cadena;
+                f = new FileReader(archivo);
+                BufferedReader b = new BufferedReader(f);
+                while ((cadena = b.readLine()) != null) {
+                    listaArchivos.add(cadena);
+                }
+                b.close();
+                iddField.setText(listaArchivos.get(0));
+                idfField.setText(listaArchivos.get(1));
+                epwField.setText(listaArchivos.get(2));
+                materialField.setText(listaArchivos.get(3));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }        
+        comprobarCampos(iddField, 0);
+        comprobarCampos(idfField, 1);
+        comprobarCampos(epwField, 2);
+        comprobarCampos(materialField, 3);
+    }
 }

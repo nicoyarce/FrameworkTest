@@ -35,14 +35,14 @@ public class EjecutarProblemas {
                 "[District Cooling [W]/Cooling]",
                 "[Facility [Hours]/Time Setpoint Not Met During Occupied Heating]",
                 "[District Heating Intensity [kWh/m2]/HVAC]"));
-        /*ArrayList<String> caracteristicas = new ArrayList<>(Arrays.asList(
+        ArrayList<String> caracteristicas = new ArrayList<>(Arrays.asList(
                 "Thickness",
                 "Conductivity",
                 "Density",
                 "Specific Heat",
                 "Thermal Absorptance",
                 "Solar Absorptance",
-                "Visible Absorptance"));*/
+                "Visible Absorptance"));
         ArrayList<Boolean> objetivos = new ArrayList<>();
         ArrayList<Boolean> eleccionCaracteristicas = new ArrayList<>();
         if (args.length > 3) {
@@ -60,7 +60,7 @@ public class EjecutarProblemas {
                     }
                 } while (!respuesta.equalsIgnoreCase("s") && !respuesta.equalsIgnoreCase("n"));
             }
-            /*for (String caracteristica : caracteristicas) {
+            for (String caracteristica : caracteristicas) {
                 System.out.println("Optimizar " + caracteristica + " (S/N)");
                 do {                    
                     respuesta = entrada.nextLine();
@@ -73,9 +73,7 @@ public class EjecutarProblemas {
                         System.out.println("Optimizar " + caracteristica + " (S/N)");
                     }
                 } while (!respuesta.equalsIgnoreCase("s") && !respuesta.equalsIgnoreCase("n"));
-            }*/
-            eleccionCaracteristicas.add(0, true);
-            System.out.println("Se optimizaran valores de Thickness");
+            }
             entrada.close();
             if (objetivos.contains(true)) {
                 test.ejecutarOptimizacion(args[0], args[1], args[2], args[3], objetivos, eleccionCaracteristicas);
@@ -120,14 +118,14 @@ public class EjecutarProblemas {
             System.out.println("---Objetivos---");
             for (int i = 0; i < solution.getNumberOfObjectives(); i++) {
                 //System.out.printf("%.2f\n", solution.getObjective(i));
-                variablesFinales.add(solution.getObjective(i));
+                objetivosFinales.add(solution.getObjective(i));
             }
             int j = 0;
-            for (int i = 0; i < cargaIDF.salidaExtraccionDatos.size(); i++) {
-                if (cargaIDF.salidaExtraccionDatos.get(i).isSeleccionado()) {
-                    cargaIDF.salidaExtraccionDatos.get(i).setSeleccion(false);
-                    System.out.print(cargaIDF.salidaExtraccionDatos.get(i).getTitulo() + ": ");
-                    System.out.println(variablesFinales.get(j));
+            for (int i = 0; i < cargaIDF.listaValoresEnergeticos.size(); i++) {
+                if (cargaIDF.listaValoresEnergeticos.get(i).isSeleccionado()) {
+                    cargaIDF.listaValoresEnergeticos.get(i).setSeleccion(false);
+                    System.out.print(cargaIDF.listaValoresEnergeticos.get(i).getTitulo() + ": ");
+                    System.out.println(objetivosFinales.get(j));
                     j++;
                 }
             }
@@ -135,15 +133,17 @@ public class EjecutarProblemas {
             for (int i = 0; i < solution.getNumberOfVariables(); i++) {
                 //System.out.printf("%.2f\n", EncodingUtils.getReal(solution.getVariable(i)));
                 double var = cargaIDF.truncar(EncodingUtils.getReal(solution.getVariable(i)));
-                objetivosFinales.add(var);
+                variablesFinales.add(var);
             }
             j = 0;
-            for (int i = 0; i < cargaIDF.salidaAbrirIDF.size(); i++) {
-                if (cargaIDF.salidaAbrirIDF.get(i).isSeleccionado()) {
-                    cargaIDF.salidaAbrirIDF.get(i).setSeleccionado(false);
-                    System.out.print(cargaIDF.salidaAbrirIDF.get(i).getCaracteristica() + ": ");
-                    System.out.println(objetivosFinales.get(j));
-                    j++;
+            for (int i = 0; i < cargaIDF.listaMateriales.size(); i++) {
+                for (int k = 0; k < cargaIDF.listaMateriales.get(i).getCaracteristicas().size(); k++) {
+                    if (cargaIDF.listaMateriales.get(i).getCaracteristicas(k).isSeleccionado()) {
+                        cargaIDF.listaMateriales.get(i).getCaracteristicas(k).setSeleccionado(false);                        
+                        System.out.print("Material "+cargaIDF.listaMateriales.get(i).getName()+" -e "+cargaIDF.listaMateriales.get(i).getCaracteristicas(k).getCaracteristica() + ": ");
+                        System.out.println(variablesFinales.get(j));
+                        j++;
+                    }
                 }
             }
             System.out.println("---------------");

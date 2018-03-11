@@ -8,9 +8,9 @@ sys.path.append(pathnameto_eppy)
 archivoIDD = sys.argv[1]
 archivoIDF = sys.argv[2]
 rutaMateriales = sys.argv[3]
-nombreRespaldo = "respaldo_"+os.path.basename(archivoIDF)
+nombreRespaldo = "respaldo_" + os.path.basename(archivoIDF)
 rutaRespaldo = os.path.join(os.path.dirname(archivoIDF), nombreRespaldo)
-if not os.path.exists(rutaRespaldo):    
+if not os.path.exists(rutaRespaldo):
     copy2(archivoIDF, rutaRespaldo)
 
 IDF.setiddname(archivoIDD)
@@ -23,14 +23,16 @@ for linea in listaMateriales:
     for material in materiales:
         if(str(material.Name) == linea):
             #print("Material encontrado " + str(material.Name) + " " + linea)
-            #al imprimir mandar valor rangomin rangomax
+            # al imprimir mandar valor rangomin rangomax
+            print("N: " + material.Name)
+            print("R: " + material.Roughness)
             print("Thickness", end='%')
             print(material.Thickness, end='%')
             print(material.getrange("Thickness")['minimum'], end='%')
             print(material.getrange("Thickness")['maximum'], end='%')
             print(material.getrange("Thickness")['minimum>'], end='%')
             print(material.getrange("Thickness")['maximum<'])
-            '''
+
             print("Conductivity", end='%')
             print(material.Conductivity, end='%')
             print(material.getrange("Conductivity")['minimum'], end='%')
@@ -56,9 +58,9 @@ for linea in listaMateriales:
             print(material.Thermal_Absorptance, end='%')
             print(material.getrange("Thermal_Absorptance")['minimum'], end='%')
             print(material.getrange("Thermal_Absorptance")['maximum'], end='%')
-            print(material.getrange("Thermal_Absorptance")['minimum>'], end='%')
+            print(material.getrange("Thermal_Absorptance")
+                  ['minimum>'], end='%')
             print(material.getrange("Thermal_Absorptance")['maximum<'])
-
 
             print("Solar Absorptance", end='%')
             print(material.Solar_Absorptance, end='%')
@@ -71,16 +73,16 @@ for linea in listaMateriales:
             print(material.Visible_Absorptance, end='%')
             print(material.getrange("Visible_Absorptance")['minimum'], end='%')
             print(material.getrange("Visible_Absorptance")['maximum'], end='%')
-            print(material.getrange("Visible_Absorptance")['minimum>'], end='%')
+            print(material.getrange("Visible_Absorptance")
+                  ['minimum>'], end='%')
             print(material.getrange("Visible_Absorptance")['maximum<'])
+
             print("---")
-            '''
             break
-            
-archivoMateriales.close()       
-        
-                    
-            
+
+archivoMateriales.close()
+
+
 '''indicar los variables a optimizar
 java captura la salida estandar para saber cuantas variables son
 dada una lista de materiales, optimizar thickness'''
