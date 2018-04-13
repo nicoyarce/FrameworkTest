@@ -64,15 +64,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         selector = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
-        tituloLabel = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
         boton1Carga = new javax.swing.JButton();
         boton2Carga = new javax.swing.JButton();
         boton3Carga = new javax.swing.JButton();
         boton4Carga = new javax.swing.JButton();
-        materialLabel = new javax.swing.JLabel();
-        iddLabel = new javax.swing.JLabel();
-        idfLabel = new javax.swing.JLabel();
-        epwLabel = new javax.swing.JLabel();
+        labelMaterial = new javax.swing.JLabel();
+        labelIdd = new javax.swing.JLabel();
+        labelIdf = new javax.swing.JLabel();
+        labelEpw = new javax.swing.JLabel();
         iddField = new javax.swing.JTextField();
         idfField = new javax.swing.JTextField();
         epwField = new javax.swing.JTextField();
@@ -80,9 +80,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         salidaTextArea = new javax.swing.JTextArea();
-        salidaLabel = new javax.swing.JLabel();
+        labelSalida = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        objetivos = new javax.swing.JLabel();
+        labelObjetivos = new javax.swing.JLabel();
         objetivo1 = new javax.swing.JCheckBox();
         objetivo2 = new javax.swing.JCheckBox();
         objetivo3 = new javax.swing.JCheckBox();
@@ -108,12 +108,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             setTitle("Proyecto EP");
             setLocation(new java.awt.Point(0, 0));
             setMinimumSize(new java.awt.Dimension(800, 600));
+            setSize(new java.awt.Dimension(800, 600));
 
             jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
             jPanel1.setName("ASD"); // NOI18N
 
-            tituloLabel.setText("Seleccione archivos");
-            tituloLabel.setName("Seleccione archivos"); // NOI18N
+            labelTitulo.setText("Seleccione archivos");
+            labelTitulo.setName("Seleccione archivos"); // NOI18N
 
             boton1Carga.setText("...");
             boton1Carga.addActionListener(new java.awt.event.ActionListener() {
@@ -143,13 +144,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
             });
 
-            materialLabel.setText("Materiales");
+            labelMaterial.setText("Materiales");
 
-            iddLabel.setText("IDD");
+            labelIdd.setText("IDD");
 
-            idfLabel.setText("IDF");
+            labelIdf.setText("IDF");
 
-            epwLabel.setText("EPW");
+            labelEpw.setText("EPW");
 
             iddField.setEditable(false);
             iddField.setText("Ruta IDD");
@@ -173,20 +174,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(tituloLabel)
+                            .addComponent(labelTitulo)
                             .addGap(0, 0, Short.MAX_VALUE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(materialLabel)
-                                .addComponent(epwLabel)
-                                .addComponent(idfLabel)
-                                .addComponent(iddLabel))
+                                .addComponent(labelMaterial)
+                                .addComponent(labelEpw)
+                                .addComponent(labelIdf)
+                                .addComponent(labelIdd))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(epwField, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(idfField, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(iddField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(materialField, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
+                                .addComponent(materialField, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE))
                             .addGap(31, 31, 31)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(boton2Carga)
@@ -199,22 +200,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(tituloLabel)
+                    .addComponent(labelTitulo)
                     .addGap(12, 12, 12)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(iddLabel)
+                        .addComponent(labelIdd)
                         .addComponent(iddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(boton1Carga))
                     .addGap(16, 16, 16)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(idfLabel)
+                        .addComponent(labelIdf)
                         .addComponent(idfField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(boton2Carga))
                     .addGap(15, 15, 15)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(4, 4, 4)
-                            .addComponent(epwLabel))
+                            .addComponent(labelEpw))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(epwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(boton3Carga)))
@@ -222,7 +223,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(boton4Carga)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(materialLabel)
+                            .addComponent(labelMaterial)
                             .addComponent(materialField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addContainerGap(55, Short.MAX_VALUE))
             );
@@ -231,6 +232,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             salidaTextArea.setEditable(false);
             salidaTextArea.setColumns(20);
+            salidaTextArea.setFont(salidaTextArea.getFont());
             salidaTextArea.setRows(5);
             salidaTextArea.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
             jScrollPane1.setViewportView(salidaTextArea);
@@ -238,7 +240,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             System.setOut(con);
             System.setErr(con);
 
-            salidaLabel.setText("Salida");
+            labelSalida.setText("Salida");
 
             javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
             jPanel2.setLayout(jPanel2Layout);
@@ -250,7 +252,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(jScrollPane1)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(salidaLabel)
+                            .addComponent(labelSalida)
                             .addGap(0, 0, Short.MAX_VALUE)))
                     .addContainerGap())
             );
@@ -258,7 +260,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addGap(5, 5, 5)
-                    .addComponent(salidaLabel)
+                    .addComponent(labelSalida)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jScrollPane1)
                     .addContainerGap())
@@ -266,7 +268,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-            objetivos.setText("Objetivos");
+            labelObjetivos.setText("Objetivos");
 
             objetivo1.setText("Total Energy [kWh]/Total Site Energy");
             objetivo1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -319,7 +321,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                             .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(objetivos)
+                            .addComponent(labelObjetivos)
                             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -335,7 +337,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(objetivos)
+                    .addComponent(labelObjetivos)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(objetivo1)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -468,7 +470,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addContainerGap(20, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(18, 18, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(botonOptimizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             );
@@ -481,13 +483,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createSequentialGroup()
                             .addComponent(jPanel3, 207, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(botonOptimizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(0, 6, Short.MAX_VALUE)))
-                    .addContainerGap())
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                            .addComponent(botonOptimizar, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                            .addContainerGap(26, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addContainerGap())))
             );
 
             pack();
@@ -503,7 +506,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             iddField.setText(file.getAbsolutePath());
             camposListos.set(0, true);
         } else {
-            System.out.println("Carga de archivo " + iddLabel.getText() + " cancelada");
+            System.out.println("Carga de archivo " + labelIdd.getText() + " cancelada");
             iddField.setText("Ruta IDD");
             camposListos.set(0, false);
         }
@@ -520,7 +523,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             idfField.setText(file.getAbsolutePath());
             camposListos.set(1, true);
         } else {
-            System.out.println("Carga de archivo " + idfLabel.getText() + " cancelada");
+            System.out.println("Carga de archivo " + labelIdf.getText() + " cancelada");
             idfField.setText("Ruta IDF");
             camposListos.set(1, false);
         }
@@ -537,7 +540,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             epwField.setText(file.getAbsolutePath());
             camposListos.set(2, true);
         } else {
-            System.out.println("Carga de archivo " + epwLabel.getText() + " cancelada");
+            System.out.println("Carga de archivo " + labelEpw.getText() + " cancelada");
             epwField.setText("Ruta EPW");
             camposListos.set(2, false);
         }
@@ -554,20 +557,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             materialField.setText(file.getAbsolutePath());
             camposListos.set(3, true);
         } else {
-            System.out.println("Carga de archivo " + materialLabel.getText() + " cancelada");
+            System.out.println("Carga de archivo " + labelMaterial.getText() + " cancelada");
             materialField.setText("Ruta Materiales");
             camposListos.set(3, false);
         }
         comprobarCampos(materialField, 3);
         comprobarComponentesGUI();
     }//GEN-LAST:event_boton4CargaActionPerformed
-    /*Comprueba si la extension de los archivos es correcta*/        
-    private void comprobarCampos(JTextField field, int nroCampo) {        
-        String extension = field.getText().substring(field.getText().lastIndexOf("."));                
-        if (field.getText().endsWith(extension)
-                || field.getText().endsWith(extension.toUpperCase())) {
-            camposListos.set(nroCampo, true);
-            field.setBackground(verde);
+    /*Comprueba si la extension de los archivos es correcta*/
+    private void comprobarCampos(JTextField field, int nroCampo) {
+        File temporal = new File(field.getText());
+        if (temporal.exists()) {
+            String extension = field.getText().substring(field.getText().lastIndexOf("."));
+            if (field.getText().endsWith(extension)
+                    || field.getText().endsWith(extension.toUpperCase())) {
+                camposListos.set(nroCampo, true);
+                field.setBackground(verde);
+            } else {
+                camposListos.set(nroCampo, false);
+                field.setBackground(rojo);
+            }
         } else {
             camposListos.set(nroCampo, false);
             field.setBackground(rojo);
@@ -585,6 +594,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void botonOptimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOptimizarActionPerformed
         guardarRutas();
+        System.out.println("Ruta IDD: " + iddField.getText());
+        System.out.println("Ruta EPW: " + epwField.getText());
+        System.out.println("Ruta IDF: " + idfField.getText());
+        System.out.println("Ruta Materiales: " + materialField.getText());
         Runnable myRun;
         myRun = () -> {
             ArrayList<Boolean> objetivos = new ArrayList(Arrays.asList(
@@ -620,7 +633,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         variable6.setEnabled(false);
         variable7.setEnabled(false);
         botonOptimizar.setEnabled(false);
-
     }//GEN-LAST:event_botonOptimizarActionPerformed
 
     private void objetivo1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_objetivo1StateChanged
@@ -735,30 +747,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton boton4Carga;
     private javax.swing.JButton botonOptimizar;
     private javax.swing.JTextField epwField;
-    private javax.swing.JLabel epwLabel;
     private javax.swing.JTextField iddField;
-    private javax.swing.JLabel iddLabel;
     private javax.swing.JTextField idfField;
-    private javax.swing.JLabel idfLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelEpw;
+    private javax.swing.JLabel labelIdd;
+    private javax.swing.JLabel labelIdf;
+    private javax.swing.JLabel labelMaterial;
+    private javax.swing.JLabel labelObjetivos;
+    private javax.swing.JLabel labelSalida;
+    private javax.swing.JLabel labelTitulo;
     private javax.swing.JTextField materialField;
-    private javax.swing.JLabel materialLabel;
     private javax.swing.JCheckBox objetivo1;
     private javax.swing.JCheckBox objetivo2;
     private javax.swing.JCheckBox objetivo3;
     private javax.swing.JCheckBox objetivo4;
     private javax.swing.JCheckBox objetivo5;
     private javax.swing.JCheckBox objetivo6;
-    private javax.swing.JLabel objetivos;
-    private javax.swing.JLabel salidaLabel;
     private javax.swing.JTextArea salidaTextArea;
     private javax.swing.JFileChooser selector;
-    private javax.swing.JLabel tituloLabel;
     private javax.swing.JCheckBox variable1;
     private javax.swing.JCheckBox variable2;
     private javax.swing.JCheckBox variable3;
@@ -799,7 +811,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }        
+        }
         comprobarCampos(iddField, 0);
         comprobarCampos(idfField, 1);
         comprobarCampos(epwField, 2);

@@ -6171,9 +6171,9 @@ Schedule:Compact,
 Material,
     1_1_37,                   !- Name
     Rough,                    !- Roughness
-    0.17,                     !- Thickness
-    0.04,                     !- Conductivity
-    10.0,                     !- Density
+    0.1,                      !- Thickness
+    0.09,                     !- Conductivity
+    7.98,                     !- Density
     1400.0,                   !- Specific Heat
     0.9,                      !- Thermal Absorptance
     0.6,                      !- Solar Absorptance
@@ -6182,9 +6182,9 @@ Material,
 Material,
     1_2_9,                    !- Name
     Rough,                    !- Roughness
-    0.1,                      !- Thickness
-    1.13,                     !- Conductivity
-    2000.0,                   !- Density
+    0.06,                     !- Thickness
+    0.14,                     !- Conductivity
+    1806.85,                  !- Density
     1000.0,                   !- Specific Heat
     0.9,                      !- Thermal Absorptance
     0.6,                      !- Solar Absorptance
@@ -6193,9 +6193,9 @@ Material,
 Material,
     1_3_29,                   !- Name
     Rough,                    !- Roughness
-    0.07,                     !- Thickness
-    0.41,                     !- Conductivity
-    1200.0,                   !- Density
+    0.15,                     !- Thickness
+    0.34,                     !- Conductivity
+    150.41,                   !- Density
     840.0,                    !- Specific Heat
     0.9,                      !- Thermal Absorptance
     0.73,                     !- Solar Absorptance
@@ -6270,7 +6270,7 @@ Material,
 Material,
     9_1_108,                  !- Name
     Rough,                    !- Roughness
-    0.23,                     !- Thickness
+    0.035,                    !- Thickness
     0.19,                     !- Conductivity
     700.0,                    !- Density
     2390.0,                   !- Specific Heat

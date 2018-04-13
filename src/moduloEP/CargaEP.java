@@ -123,13 +123,13 @@ public class CargaEP {
             // read any errors from the attempted command
             //System.out.println("Here is the standard error of the command (if any):\n");
             while ((s = stdError.readLine()) != null) {
-                System.out.println(s);
+                System.err.println(s);
                 if (s.contains("**FATAL")) {
                     System.exit(-1);
                 }
             }
         } catch (IOException | InterruptedException ex) {
-            System.out.println("exception happened - here's what I know: " + ex);
+            System.err.println("exception happened - here's what I know: " + ex);
             System.exit(-1);
         }
     }
@@ -153,13 +153,17 @@ public class CargaEP {
 
             // read any errors from the attempted command
             //System.out.println("Here is the standard error of the command (if any):\n");
+            int errores = 0;
             while ((s = stdError.readLine()) != null) {
-                System.err.println("Advertencia de E+: ");
-                System.err.println("Revisar archivo de salida eplusout.err para mas informacion");
-                //System.out.println(s);                
-            }
+                errores++;
+                if (errores == 1){
+                    System.err.println("---Advertencia de EnergyPlus---");
+                    System.err.println("Revisar archivo de salida eplusout.err para mas informacion");
+                }                
+                System.err.println(s);                
+            }            
         } catch (IOException | InterruptedException ex) {
-            System.out.println("exception happened - here's what I know: " + ex);
+            System.err.println("exception happened - here's what I know: " + ex);
             System.exit(-1);
         }
     }
@@ -184,10 +188,10 @@ public class CargaEP {
             // read any errors from the attempted command
             //System.out.println("Here is the standard error of the command (if any):\n");
             while ((s = stdError.readLine()) != null) {
-                System.out.println(s);
+                System.err.println(s);
             }
         } catch (IOException | InterruptedException ex) {
-            System.out.println("exception happened - here's what I know: " + ex);
+            System.err.println("exception happened - here's what I know: " + ex);
             System.exit(-1);
         }
     }
@@ -228,10 +232,10 @@ public class CargaEP {
             // read any errors from the attempted command
             //System.out.println("Here is the standard error of the command (if any):\n");
             while ((s = stdError.readLine()) != null) {
-                System.out.println(s);
+                System.err.println(s);
             }
         } catch (IOException | InterruptedException ex) {
-            System.out.println("exception happened - here's what I know: " + ex);
+            System.err.println("exception happened - here's what I know: " + ex);
             System.exit(-1);
         }
     }

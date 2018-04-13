@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 import moduloEP.CargaEP;
 import org.moeaframework.Executor;
+import org.moeaframework.Instrumenter;
+import org.moeaframework.analysis.plot.Plot;
 import org.moeaframework.core.NondominatedPopulation;
 import org.moeaframework.core.Solution;
 import org.moeaframework.core.variable.EncodingUtils;
@@ -21,9 +23,8 @@ public class EjecutarProblemas {
     //public static boolean fin = false;
 
     public static void main(String[] args) {
-
         for (String arg : args) {
-            System.out.println("Argumentos " + arg);
+            System.out.println("Ruta elegida" + arg);
         }
         EjecutarProblemas test = new EjecutarProblemas();
         Scanner entrada = new Scanner(System.in);
@@ -93,13 +94,13 @@ public class EjecutarProblemas {
         } catch (IOException ex) {
             System.err.println(ex);
         }
-        exec = new Executor();
+        exec = new Executor();        
         NondominatedPopulation result = exec
                 .withAlgorithm("NSGAII") //algoritmo a utilzar
                 /*reemplazar nombre de clase*/
                 .withProblemClass(FuncionOptimizar.class, cargaIDF) //clase donde esta el problema
                 .withMaxEvaluations(5) //cantidad de evaluaciones
-                .withProperty("populationSize", 5) //numero poblacion, por defecto 100 en NSGAII
+                .withProperty("populationSize", 20) //numero poblacion, por defecto 100 en NSGAII
                 //.withInstrumenter(instrumenter)
                 .distributeOnAllCores()
                 .run();
@@ -123,7 +124,7 @@ public class EjecutarProblemas {
             int j = 0;
             for (int i = 0; i < cargaIDF.listaValoresEnergeticos.size(); i++) {
                 if (cargaIDF.listaValoresEnergeticos.get(i).isSeleccionado()) {
-                    cargaIDF.listaValoresEnergeticos.get(i).setSeleccion(false);
+                    //cargaIDF.listaValoresEnergeticos.get(i).setSeleccion(false);
                     System.out.print(cargaIDF.listaValoresEnergeticos.get(i).getTitulo() + ": ");
                     System.out.println(objetivosFinales.get(j));
                     j++;
@@ -139,20 +140,22 @@ public class EjecutarProblemas {
             for (int i = 0; i < cargaIDF.listaMateriales.size(); i++) {
                 for (int k = 0; k < cargaIDF.listaMateriales.get(i).getCaracteristicas().size(); k++) {
                     if (cargaIDF.listaMateriales.get(i).getCaracteristicas(k).isSeleccionado()) {
-                        cargaIDF.listaMateriales.get(i).getCaracteristicas(k).setSeleccionado(false);                        
-                        System.out.print("Material "+cargaIDF.listaMateriales.get(i).getName()+" -e "+cargaIDF.listaMateriales.get(i).getCaracteristicas(k).getCaracteristica() + ": ");
+                        //cargaIDF.listaMateriales.get(i).getCaracteristicas(k).setSeleccionado(false);                        
+                        System.out.print("Material "+cargaIDF.listaMateriales.get(i).getName()+" -> "+cargaIDF.listaMateriales.get(i).getCaracteristicas(k).getCaracteristica() + ": ");
                         System.out.println(variablesFinales.get(j));
                         j++;
                     }
                 }
             }
             System.out.println("---------------");
+            objetivosFinales.clear();
+            variablesFinales.clear();
         }
 
         //Para graficar frontera de pareto (solo con mas de 1 objetivo)
-        /*new Plot()
+        new Plot()
                 .add("NSGAII", result)
-                .show();*/
+                .show();
     }
 
     /*public void cancelarOptimizacion() {

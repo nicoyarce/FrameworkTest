@@ -21,6 +21,9 @@
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[800, 600]"/>
     </Property>
+    <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[800, 600]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -57,7 +60,7 @@
                       <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="botonOptimizar" max="32767" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -75,15 +78,17 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel2" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jPanel3" min="207" pref="207" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="botonOptimizar" max="32767" attributes="0"/>
-                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+                      <EmptySpace pref="30" max="32767" attributes="0"/>
+                      <Component id="botonOptimizar" pref="60" max="32767" attributes="0"/>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jPanel2" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -106,22 +111,22 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="tituloLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelTitulo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="materialLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="epwLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="idfLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="iddLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelMaterial" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelEpw" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelIdf" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelIdd" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="epwField" alignment="0" max="32767" attributes="0"/>
                               <Component id="idfField" alignment="0" max="32767" attributes="0"/>
                               <Component id="iddField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="materialField" pref="400" max="32767" attributes="0"/>
+                              <Component id="materialField" pref="370" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -140,16 +145,16 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="tituloLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelTitulo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="iddLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelIdd" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="iddField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="boton1Carga" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="idfLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelIdf" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="idfField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="boton2Carga" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -157,7 +162,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                          <Component id="epwLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelEpw" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="epwField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -168,7 +173,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="boton4Carga" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="materialLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelMaterial" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="materialField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -178,7 +183,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="tituloLabel">
+        <Component class="javax.swing.JLabel" name="labelTitulo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Seleccione archivos"/>
             <Property name="name" type="java.lang.String" value="Seleccione archivos" noResource="true"/>
@@ -216,22 +221,22 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boton4CargaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="materialLabel">
+        <Component class="javax.swing.JLabel" name="labelMaterial">
           <Properties>
             <Property name="text" type="java.lang.String" value="Materiales"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="iddLabel">
+        <Component class="javax.swing.JLabel" name="labelIdd">
           <Properties>
             <Property name="text" type="java.lang.String" value="IDD"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="idfLabel">
+        <Component class="javax.swing.JLabel" name="labelIdf">
           <Properties>
             <Property name="text" type="java.lang.String" value="IDF"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="epwLabel">
+        <Component class="javax.swing.JLabel" name="labelEpw">
           <Properties>
             <Property name="text" type="java.lang.String" value="EPW"/>
           </Properties>
@@ -284,7 +289,7 @@
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="salidaLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelSalida" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -296,7 +301,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                  <Component id="salidaLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelSalida" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -316,6 +321,11 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+                  <FontInfo relative="true">
+                    <Font component="salidaTextArea" property="font" relativeSize="true" size="0"/>
+                  </FontInfo>
+                </Property>
                 <Property name="rows" type="int" value="5"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Cursor de Texto"/>
@@ -327,7 +337,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="salidaLabel">
+        <Component class="javax.swing.JLabel" name="labelSalida">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salida"/>
           </Properties>
@@ -354,7 +364,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="objetivos" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelObjetivos" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -376,7 +386,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="objetivos" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelObjetivos" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="objetivo1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -395,7 +405,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="objetivos">
+        <Component class="javax.swing.JLabel" name="labelObjetivos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Objetivos"/>
           </Properties>

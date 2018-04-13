@@ -40,13 +40,17 @@ public class FuncionOptimizar extends AbstractProblem {
         Solution solution = new Solution(CargaEP.nVariables, CargaEP.nObjetivos); //n variables totales , n de variables objetivo        
         // se fija dominio de busqueda por cada variable
         // dominio de busqueda basado en valores de idf
-        // tambien basados en entrada de script python       
-        for (int i = 0; i < CargaEP.nVariables; i++) {
+        // tambien basados en entrada de script python  
+        int k = 0;
+        for (int i = 0; i < cargaIDF.listaMateriales.size(); i++) {
             for (int j = 0; j < cargaIDF.listaMateriales.get(i).getCaracteristicas().size(); j++) {
-                //usar output de la variable listaMateriales
-                double minimo = cargaIDF.listaMateriales.get(i).getCaracteristicas(j).getRangoMin();
-                double maximo = cargaIDF.listaMateriales.get(i).getCaracteristicas(j).getRangoMax();
-                solution.setVariable(i, EncodingUtils.newReal(minimo, maximo));
+                if (cargaIDF.listaMateriales.get(i).getCaracteristicas(j).isSeleccionado()) {
+                    //usar output de la variable listaMateriales
+                    double minimo = cargaIDF.listaMateriales.get(i).getCaracteristicas(j).getRangoMin();
+                    double maximo = cargaIDF.listaMateriales.get(i).getCaracteristicas(j).getRangoMax();
+                    solution.setVariable(k, EncodingUtils.newReal(minimo, maximo));
+                    k++;
+                }
             }
         }
         return solution;
@@ -69,11 +73,14 @@ public class FuncionOptimizar extends AbstractProblem {
             System.err.println(ex);
         }
         /*funciones objetivo de todo el problema*/
-        //arreglar seleccion de objetivos        
         double objetivo;
-        for (int i = 0; i < CargaEP.nObjetivos; i++) {
-            objetivo = cargaIDF.listaValoresEnergeticos.get(i).getValor();
-            sltn.setObjective(i, objetivo);  //indice de fx objetivo , fx a optimizar
+        int j = 0;
+        for (int i = 0; i < cargaIDF.listaValoresEnergeticos.size(); i++) {
+            if (cargaIDF.listaValoresEnergeticos.get(i).isSeleccionado()) {
+                objetivo = cargaIDF.listaValoresEnergeticos.get(i).getValor();
+                sltn.setObjective(j, objetivo);  //indice de fx objetivo , fx a optimizar
+                j++;
+            }
         }
         modificaciones.clear();
     }
