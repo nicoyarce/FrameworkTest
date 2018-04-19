@@ -2,17 +2,11 @@ package moduloGUI;
 
 import java.awt.Color;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,6 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -48,6 +43,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         camposListos = new ArrayList<>(Arrays.asList(false, false, false, false));
         initComponents();
+        ejecutor = new EjecutarProblemas();
+        if (!ejecutor.comprobarPython()) {
+            int input = JOptionPane.showOptionDialog(null, "No se encuentra el comando Python en su línea de comandos", "Error", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+            if(input == JOptionPane.OK_OPTION){
+                System.exit(0);
+            }
+        }
         variable1.setSelected(true);
         leerArchivo(new File("ultimasRutas.txt"));
         comprobarComponentesGUI();
@@ -610,7 +612,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     variable5.isSelected(), variable6.isSelected(),
                     variable7.isSelected()));
 
-            ejecutor = new EjecutarProblemas();
             ejecutor.ejecutarOptimizacion(iddField.getText(), idfField.getText(), epwField.getText(), materialField.getText(), objetivos, variables);
         };
         t = new Thread(myRun);

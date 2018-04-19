@@ -1,12 +1,13 @@
 package moduloMoea;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import moduloEP.CargaEP;
 import org.moeaframework.Executor;
-import org.moeaframework.Instrumenter;
 import org.moeaframework.analysis.plot.Plot;
 import org.moeaframework.core.NondominatedPopulation;
 import org.moeaframework.core.Solution;
@@ -23,10 +24,14 @@ public class EjecutarProblemas {
     //public static boolean fin = false;
 
     public static void main(String[] args) {
+        EjecutarProblemas test = new EjecutarProblemas();
+        if (!test.comprobarPython()) {
+            System.err.println("No se encuentra el comando Python en su línea de comandos");            
+        }
         for (String arg : args) {
             System.out.println("Ruta elegida" + arg);
         }
-        EjecutarProblemas test = new EjecutarProblemas();
+
         Scanner entrada = new Scanner(System.in);
         String respuesta = "";
         ArrayList<String> titulosEnergeticos = new ArrayList<>(Arrays.asList(
@@ -63,13 +68,13 @@ public class EjecutarProblemas {
             }
             for (String caracteristica : caracteristicas) {
                 System.out.println("Optimizar " + caracteristica + " (S/N)");
-                do {                    
+                do {
                     respuesta = entrada.nextLine();
                     if (respuesta.equalsIgnoreCase("s")) {
                         eleccionCaracteristicas.add(true);
                     } else if (respuesta.equalsIgnoreCase("n")) {
                         eleccionCaracteristicas.add(false);
-                    } else {                            
+                    } else {
                         System.out.println("Respuesta no valida");
                         System.out.println("Optimizar " + caracteristica + " (S/N)");
                     }
@@ -94,7 +99,7 @@ public class EjecutarProblemas {
         } catch (IOException ex) {
             System.err.println(ex);
         }
-        exec = new Executor();        
+        exec = new Executor();
         NondominatedPopulation result = exec
                 .withAlgorithm("NSGAII") //algoritmo a utilzar
                 /*reemplazar nombre de clase*/
@@ -141,7 +146,7 @@ public class EjecutarProblemas {
                 for (int k = 0; k < cargaIDF.listaMateriales.get(i).getCaracteristicas().size(); k++) {
                     if (cargaIDF.listaMateriales.get(i).getCaracteristicas(k).isSeleccionado()) {
                         //cargaIDF.listaMateriales.get(i).getCaracteristicas(k).setSeleccionado(false);                        
-                        System.out.print("Material "+cargaIDF.listaMateriales.get(i).getName()+" -> "+cargaIDF.listaMateriales.get(i).getCaracteristicas(k).getCaracteristica() + ": ");
+                        System.out.print("Material " + cargaIDF.listaMateriales.get(i).getName() + " -> " + cargaIDF.listaMateriales.get(i).getCaracteristicas(k).getCaracteristica() + ": ");
                         System.out.println(variablesFinales.get(j));
                         j++;
                     }
@@ -170,4 +175,34 @@ public class EjecutarProblemas {
         t.start();
         fin = true;
     }*/
+    /*Comprueba si python esta disponible a traves de la linea de comandos,
+     devuelve verdadero cuando es detectado*/
+    public boolean comprobarPython(){
+        try {
+            String s = null;
+            String cmd = "python --version";
+            Process p = Runtime.getRuntime().exec(cmd);
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            while ((s = stdInput.readLine()) != null) {
+                return s.contains("Python");
+            }
+            while ((s = stdError.readLine()) != null) {
+                System.err.println(s);
+                return false;
+            }
+            cmd = "py --version";
+            p = Runtime.getRuntime().exec(cmd);            
+            while ((s = stdInput.readLine()) != null) {
+                return s.contains("Python");
+            }
+            while ((s = stdError.readLine()) != null) {
+                System.err.println(s);
+                return false;
+            }
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+        return false;
+    }
 }
