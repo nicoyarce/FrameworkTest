@@ -1,7 +1,5 @@
-from eppy.modeleditor import IDF
 import sys
-pathnameto_eppy = '../'
-sys.path.append(pathnameto_eppy)
+from eppy.modeleditor import IDF
 
 archivoIDD = sys.argv[1]
 archivoIDF = sys.argv[2]

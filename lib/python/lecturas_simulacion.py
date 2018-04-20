@@ -1,8 +1,6 @@
-from eppy.results import readhtml
 import sys
 import os
-pathnameto_eppy = '../'
-sys.path.append(pathnameto_eppy)
+from eppy.results import readhtml
 
 lista_de_valores = []
 archivoIDF = sys.argv[1]

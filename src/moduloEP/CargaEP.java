@@ -25,6 +25,7 @@ public class CargaEP {
     public static int nObjetivos;
     public ArrayList<Material> listaMateriales = new ArrayList<>();
     public ArrayList<ValorEnergetico> listaValoresEnergeticos = new ArrayList<>();
+    public String comando = "py";
 
     public CargaEP(String rutaIDD, String rutaIDF, String rutaEPW, String rutaMateriales, ArrayList<Boolean> objetivos, ArrayList<Boolean> eleccionCaracteristicas) throws IOException {
         ArrayList<String> titulosEnergeticos = new ArrayList<>(Arrays.asList(
@@ -69,7 +70,7 @@ public class CargaEP {
         String rutaScript = "lib/python/abrirIDF.py";
 
         try {
-            String cmd = "python " + rutaScript + " " + rutaIDD + " " + rutaIDF
+            String cmd = comando + " " + rutaScript + " " + rutaIDD + " " + rutaIDF
                     + " " + rutaMateriales;
             Process p = Runtime.getRuntime().exec(cmd);
             System.out.println("Abriendo IDF");
@@ -139,7 +140,7 @@ public class CargaEP {
         String s = null;
         final String rutaScript = "lib/python/simular.py";
         try {
-            String cmd = "python " + rutaScript + " " + rutaIDD + " " + rutaIDF
+            String cmd = comando + " " + rutaScript + " " + rutaIDD + " " + rutaIDF
                     + " " + rutaEPW;
             Process p = Runtime.getRuntime().exec(cmd);
             System.out.println("Simulando IDF");
@@ -156,12 +157,12 @@ public class CargaEP {
             int errores = 0;
             while ((s = stdError.readLine()) != null) {
                 errores++;
-                if (errores == 1){
+                if (errores == 1) {
                     System.err.println("---Advertencia de EnergyPlus---");
                     System.err.println("Revisar archivo de salida eplusout.err para mas informacion");
-                }                
-                System.err.println(s);                
-            }            
+                }
+                System.err.println(s);
+            }
         } catch (IOException | InterruptedException ex) {
             System.err.println("exception happened - here's what I know: " + ex);
             System.exit(-1);
@@ -175,7 +176,7 @@ public class CargaEP {
         int i = 0;
         String s = null;
         try {
-            String cmd = "python " + rutaScript + " " + rutaIDF;
+            String cmd = comando + " " + rutaScript + " " + rutaIDF;
             Process p = Runtime.getRuntime().exec(cmd);
             System.out.println("Extrayendo datos energeticos");
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -215,7 +216,7 @@ public class CargaEP {
             }
         }
         try {
-            String cmd = "python " + rutaScript + " " + rutaIDD + " " + rutaIDF
+            String cmd = comando + " " + rutaScript + " " + rutaIDD + " " + rutaIDF
                     + " " + rutaMateriales + " " + valores;
             Process p = Runtime.getRuntime().exec(cmd);
             System.out.println("Modificando IDF");

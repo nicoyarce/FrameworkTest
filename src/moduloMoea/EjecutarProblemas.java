@@ -26,7 +26,12 @@ public class EjecutarProblemas {
     public static void main(String[] args) {
         EjecutarProblemas test = new EjecutarProblemas();
         if (!test.comprobarPython()) {
-            System.err.println("No se encuentra el comando Python en su línea de comandos");            
+            System.err.println("No se encuentra el comando Python en su línea de comandos");   
+            System.exit(0);
+        }
+        if (!test.comprobarEppy()) {
+            System.err.println("No se encuentra el modulo eppy en su equipo, puede descargarlo escribiendo en consola: \n pip install eppy");            
+            System.exit(0);
         }
         for (String arg : args) {
             System.out.println("Ruta elegida" + arg);
@@ -200,6 +205,27 @@ public class EjecutarProblemas {
                 System.err.println(s);
                 return false;
             }
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+        return false;
+    }
+    /*Comprueba si eppy esta instalado en el equipo,
+     devuelve verdadero cuando es detectado*/
+    public boolean comprobarEppy(){
+        try {
+            String s = null;
+            String cmd = "pip show eppy";
+            Process p = Runtime.getRuntime().exec(cmd);
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            while ((s = stdInput.readLine()) != null) {
+                return s.contains("Name: eppy");
+            }
+            while ((s = stdError.readLine()) != null) {
+                System.err.println(s);
+                return false;
+            }           
         } catch (IOException ex) {
             System.err.println(ex);
         }

@@ -44,8 +44,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         camposListos = new ArrayList<>(Arrays.asList(false, false, false, false));
         initComponents();
         ejecutor = new EjecutarProblemas();
-        if (!ejecutor.comprobarPython()) {
-            int input = JOptionPane.showOptionDialog(null, "No se encuentra el comando Python en su línea de comandos", "Error", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+        if (!ejecutor.comprobarPython()) {            
+            int input = JOptionPane.showOptionDialog(null, "No se encuentra el comando Python en su línea de comandos", 
+                    "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+            if(input == JOptionPane.OK_OPTION){
+                System.exit(0);
+            }
+        }
+        if(!ejecutor.comprobarEppy()){
+            int input = JOptionPane.showOptionDialog(null, "No se encuentra el modulo eppy instalado en su equipo\nPuede descargarlo escribiendo en consola:\npip install eppy", 
+                    "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
             if(input == JOptionPane.OK_OPTION){
                 System.exit(0);
             }
